@@ -15,19 +15,17 @@ cohort41 = Cohort("Cohort 41")
 cohort42 = Cohort("Cohort 42")
 
 # Students
-daniel_meza = Student("Daniel", "Meza")
-daniel_meza.set_cohort_and_slack("Cohort 40")
-brandy_antonio = Student("Brandy", "Antonio")
-brandy_antonio.set_cohort_and_slack("Cohort 41")
-harvey_mendoza = Student("Harvey", "Mendoza")
-harvey_mendoza.set_cohort_and_slack("Cohort 42")
-jesus_vazquez = Student("Jesus", "Vazquez")
-jesus_vazquez.set_cohort_and_slack("Cohort 40")
+daniel_meza = Student("Daniel", "Meza", "C40 Channel", cohort40)
+brandy_antonio = Student("Brandy", "Antonio", "C41 Channel", cohort41)
+harvey_mendoza = Student("Harvey", "Mendoza", "C42 Channel", cohort42)
+jesus_vazquez = Student("Jesus", "Vazquez", "C40 Channel", cohort40)
 
 # Instructors
-joe_shepherd = Instructor("Joe", "Shepherd", "JavaScript")
-bryan_nilsen = Instructor("Bryan", "Nilsen", "C#")
-madi_pepper = Instructor("Madi", "Pepper", "Python")
+joe_shepherd = Instructor(
+    "Joe", "Shepherd", "C40 Channel", "Cohort 40", "JavaScript")
+bryan_nilsen = Instructor("Bryan", "Nilsen", "C41 Channel", "Cohort 41", "C#")
+madi_pepper = Instructor(
+    "Madi", "Pepper", "C42 Channel", "Cohort 42", "Python")
 
 # Assigning students to cohort
 cohort40.setStudents([daniel_meza, jesus_vazquez])

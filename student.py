@@ -1,11 +1,7 @@
-class Student:
-    def __init__(self, first, last):
-        self.first = first
-        self.last = last
-        self.slack = ""
-        self.cohort = ""
-        self.exercises = []
+from nss_person import NSSPerson
 
-    def set_cohort_and_slack(self, cohort):
-        self.cohort = cohort
-        self.slack = self.cohort + " channel"
+
+class Student(NSSPerson):
+    def __init__(self, first, last, slack, cohort):
+        super().__init__(first, last, slack, cohort)
+        self.exercises = []
