@@ -9,3 +9,6 @@ class Instructor(Student, NSSPerson):
 
     def set_exercises(self, student, exercises):
         student.exercises.extend(exercises)
+
+    def __repr__(self):
+        return f'{self.first} {self.last} is in {self.cohort}, forte is {self.specialty}.'

@@ -9,3 +9,6 @@ class Cohort():
 
     def setStudents(self, students):
         self.students.extend(students)
+
+    def __repr__(self):
+        return f'{self.name}'
