@@ -295,5 +295,18 @@ INSERT into instructorExercises
 VALUES
     (NULL, 3, 7, 5);
 
+select
+    e.Id exerciseId,
+    e.Name as 'exercise name',
+    s.id,
+    s.first as 'student firstname',
+    s.last as 'student lastname',
+    i.first as 'instructor firstname',
+    i.last as 'instructor lastname'
+from exercises e
+    join instructorExercises ie on ie.exerciseId = e.Id
+    join instructors i on ie.instructorId = i.id
+    join students s on ie.studentId = s.Id
+order by e.name;
 
 
