@@ -244,6 +244,50 @@ class StudentExerciseReports():
                 for exercise in exercises:
                     print(f'\t* {exercise}')
 
+    def exercises_assignments_with_students(self):
+        exercises = dict()
+
+        with sqlite3.connect(self.db_path) as conn:
+            db_cursor = conn.cursor()
+
+            db_cursor.execute("""
+                select
+                    e.Id exerciseId,
+                    e.Name as 'exercise name',
+                    s.id,
+                    s.first as 'student firstname',
+                    s.last as 'student lastname',
+                    i.first as 'instructor firstname',
+                    i.last as 'instructor lastname'
+                from exercises e
+                    join instructorExercises ie on ie.exerciseId = e.Id
+                    join instructors i on ie.instructorId = i.id
+                    join students s on ie.studentId = s.Id
+                order by e.name;
+            """)
+
+            dataset = db_cursor.fetchall()
+
+            for row in dataset:
+                exercise_id = row[0]
+                exercise_name = row[1]
+                student_id = row[2]
+                student_name = f'{row[3]} {row[4]}'
+                instructor_name = f'{row[5]} {row[6]}'
+
+                if exercise_name not in exercises:
+                    exercises[exercise_name] = [
+                        (student_name, instructor_name)]
+                else:
+                    exercises[exercise_name].append(
+                        (student_name, instructor_name))
+
+            for exercise in exercises.items():
+                print(exercise[0])
+                for student, instructor in exercise[1]:
+                    print(
+                        f'\t* Assigned by: {instructor} to {student}.')
+
 
 reports = StudentExerciseReports()
 reports.all_students()
@@ -258,3 +302,7 @@ print("********************")
 print("* Student Workload *")
 print("********************")
 reports.student_workload()
+print("************************")
+print("* Exercise Assignments *")
+print("************************")
+reports.exercises_assignments_with_students()
